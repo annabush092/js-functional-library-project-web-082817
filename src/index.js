@@ -204,16 +204,17 @@ const fi = (function() {
     },
 
     bind: function(callback, obj) {
-      obj.func = callback;
+      obj.catdog = callback;
       return function() {
-        return obj.func();
+        return obj.catdog();
       };
-      //return function that is now within object scope
     },
 
-    oBind: function(callback, obj) {
-      return obj.callback;
-      //return function that is now within object scope
+    oBind: function(func, obj, greeting) {
+      return function() {
+        Object.assign(this, obj);
+        return func(greeting);
+      };
     }
   };
 })();
